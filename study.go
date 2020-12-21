@@ -2,24 +2,14 @@ package main
 
 import "fmt"
 
-var (
-	i    int     = 1
-	f64  float64 = 1.2
-	s    string  = "test"
-	t, f bool    = true, false
-)
-
-func foo() {
-	xi := 1
-	var xf64 float32 = 1.2
-	xs := "test"
-	xt, xf := true, false
-	fmt.Println(xi, xf64, xs, xt, xf)
-	fmt.Printf("%T\n", xi)
-	fmt.Printf("%T\n", xf64)
-}
-
 func main() {
-	fmt.Println(i, f64, s, t, f)
-	foo()
+	var (
+		u8  uint8     = 255
+		i8  int8      = 127
+		f32 float32   = 0.2
+		c64 complex64 = -5 + 12i
+	)
+	fmt.Println(u8, i8, f32, c64)
+
+	fmt.Printf()
 }
