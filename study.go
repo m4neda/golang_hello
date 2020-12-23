@@ -11,5 +11,11 @@ func main() {
 	)
 	fmt.Println(u8, i8, f32, c64)
 
-	fmt.Printf()
+	fmt.Printf("type=%T value=%v", u8, u8)
+	x := 0
+	fmt.Println(x)
+	x++
+	x--
+	fmt.Println(x)
+	fmt.Println(1 << 0)
 }
