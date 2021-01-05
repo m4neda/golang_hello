@@ -3,22 +3,27 @@ package main
 import "fmt"
 
 func main() {
-	n := []int{1, 2, 3, 4, 5, 6}
-	fmt.Println(n)
-	fmt.Println(n[2])
-	fmt.Println(n[0:3])
-	fmt.Println(n[:2])
-	n[2] = 100
-	n[4] = 200
-	fmt.Println(n)
+	n := make([]int, 3, 5)
+	fmt.Printf("len=%d cap=%d value=%v\n", len(n), cap(n), n)
+	n = append(n, 0, 0)
+	fmt.Printf("len=%d cap=%d value=%v\n", len(n), cap(n), n)
+	n = append(n, 0, 0)
+	fmt.Printf("len=%d cap=%d value=%v\n", len(n), cap(n), n)
 
-	var board = [][]int{
-		[]int{0, 1, 2},
-		[]int{3, 4, 5},
-		[]int{6, 7, 8},
+	a := make([]int, 3)
+	fmt.Printf("len=%d cap=%d value=%v\n", len(a), cap(a), a)
+
+	b := make([]int, 0)
+	var c []int
+	fmt.Printf("len=%d cap=%d value=%v\n", len(b), cap(b), b)
+	fmt.Printf("len=%d cap=%d value=%v\n", len(c), cap(c), c)
+
+	fmt.Println("Practice")
+	// c = make([]int, 5)
+	c = make([]int, 0, 5)
+	for i := 0; i < 5; i++ {
+		c = append(c, i)
+		fmt.Println(c)
 	}
-	fmt.Println(board)
-
-	n = append(n, 100, 200, 300, 400)
-	fmt.Println(n)
+	fmt.Println(c)
 }
