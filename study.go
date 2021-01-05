@@ -3,19 +3,15 @@ package main
 import "fmt"
 
 func main() {
-	var (
-		u8  uint8     = 255
-		i8  int8      = 127
-		f32 float32   = 0.2
-		c64 complex64 = -5 + 12i
-	)
-	fmt.Println(u8, i8, f32, c64)
+	// var t, f bool = true, false
+	t, f := true, false
+	fmt.Printf("%T %v %t\n", t, 1, t)
+	fmt.Printf("%T %v %t\n", f, 2, f)
+	fmt.Println(true && true)
+	fmt.Println(false && true)
+	fmt.Println(false && false)
 
-	fmt.Printf("type=%T value=%v", u8, u8)
-	x := 0
-	fmt.Println(x)
-	x++
-	x--
-	fmt.Println(x)
-	fmt.Println(1 << 0)
+	fmt.Println(true || false)
+	fmt.Println(false || false)
+	fmt.Println(!true)
 }
