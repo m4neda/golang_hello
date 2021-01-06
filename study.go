@@ -1,37 +1,29 @@
 package main
 
 import (
-	"fmt"
-	"time"
+	"io"
+	"log"
+	"os"
 )
 
-func by2(num int) string {
-	if num%2 == 0 {
-		return "ok"
-	} else {
-		return "no"
-	}
-}
-func getOsName() string {
-	return "ada"
+// LoggingSettings Settting log format
+func LoggingSettings(logFile string) {
+	logfile, _ := os.OpenFile(logFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	multilogFile := io.MultiWriter(os.Stdout, logfile)
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+	log.SetOutput(multilogFile)
 }
 
 func main() {
-	switch os := getOsName(); os {
-	case "mac":
-		fmt.Println("Mac")
-	case "windows":
-		fmt.Println("Windows")
-	default:
-		fmt.Println("Default", os)
-	}
+	LoggingSettings("test.log")
 
-	t := time.Now()
-	fmt.Println(t.Hour())
-	switch {
-	case t.Hour() > 12:
-		fmt.Println("Morning")
-	case t.Hour() > 17:
-		fmt.Println("Afternoon")
-	}
+	// _, err := os.Open("faege")
+	// if err != nil {
+	// 	log.Fatalln("Exit", err)
+	// }
+	// log.Println("logging!")
+	// log.Printf("%T %v", "test", "test")
+
+	// log.Fatalf("%T %v", "test", "test")
+	// log.Fatalln("error")
 }
