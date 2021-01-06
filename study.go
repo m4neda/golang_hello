@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func by2(num int) string {
 	if num%2 == 0 {
@@ -9,20 +12,26 @@ func by2(num int) string {
 		return "no"
 	}
 }
+func getOsName() string {
+	return "ada"
+}
 
 func main() {
-	l := []string{"python", "go", "java"}
-	for i := 0; i < len(l); i++ {
-		fmt.Println(i, l[i])
+	switch os := getOsName(); os {
+	case "mac":
+		fmt.Println("Mac")
+	case "windows":
+		fmt.Println("Windows")
+	default:
+		fmt.Println("Default", os)
 	}
-	for i, v := range l {
-		fmt.Println(i, v)
-	}
-	m := map[string]int{"apple": 100, "banana": 200}
-	for k, v := range m {
-		fmt.Println(k, v)
-	}
-	for k := range m {
-		fmt.Println(k)
+
+	t := time.Now()
+	fmt.Println(t.Hour())
+	switch {
+	case t.Hour() > 12:
+		fmt.Println("Morning")
+	case t.Hour() > 17:
+		fmt.Println("Afternoon")
 	}
 }
