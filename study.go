@@ -2,17 +2,30 @@ package main
 
 import "fmt"
 
-func foo(params ...int) {
-	fmt.Println(len(params), params)
-	for _, param := range params {
-		fmt.Println(param)
+func by2(num int) string {
+	if num%2 == 0 {
+		return "ok"
+	} else {
+		return "no"
 	}
 }
-func main() {
-	foo(10, 20)
-	foo(10, 20, 30)
 
-	s := []int{1, 2, 3}
-	fmt.Println(s)
-	foo(s...)
+func main() {
+	for i := 0; i < 10; i++ {
+		if i == 3 {
+			fmt.Println("continue")
+			continue
+		}
+		if i > 5 {
+			fmt.Println("break")
+			break
+		}
+		fmt.Println(i)
+	}
+	sum := 1
+	for sum < 10 {
+		sum += sum
+		fmt.Println(sum)
+	}
+	fmt.Println(sum)
 }
