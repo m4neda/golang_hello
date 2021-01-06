@@ -2,33 +2,25 @@ package main
 
 import "fmt"
 
+func cal(price, item int) (result int) {
+	result = price * item
+	return result
+}
+func add(x, y int) (int, int) {
+	return x + y, x - y
+}
 func main() {
-	m := map[string]int{"apple": 100, "banana": 200}
-	fmt.Println(m)
-	fmt.Println(m["banana"])
-	m["banana"] = 300
-	fmt.Println(m)
-	m["new"] = 500
-	fmt.Println(m)
+	r1, r2 := add(10, 20)
+	fmt.Println(r1, r2)
 
-	fmt.Println(m["nothing"])
-
-	v, ok := m["apple"]
-	fmt.Println(v, ok)
-
-	v2, ok2 := m["nothing"]
-	fmt.Println(v2, ok2)
-
-	m2 := make(map[string]int)
-	m2["pc"] = 5000
-	fmt.Println(m2)
-
-	// var m3 map[string]int
-	// m3["pc"] = 5000
-	// fmt.Println(m3)
-
-	var s []int
-	if s == nil {
-		fmt.Println("Nil")
+	r3 := cal(100, 2)
+	fmt.Println(r3)
+	f := func() {
+		fmt.Println("inner function")
 	}
+	f()
+
+	func(x int) {
+		fmt.Println("inner function", x)
+	}(1)
 }
