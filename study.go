@@ -1,19 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func thirdPartyConnectDB() {
-	panic("Unable to connect database")
+func one(x *int) {
+	*x = 1
 }
 
-func save() {
-	defer func() {
-		s := recover()
-		fmt.Println(s)
-	}()
-	thirdPartyConnectDB()
-}
 func main() {
-	save()
-	fmt.Println("OK?")
+	var n int = 100
+	one(&n)
+	fmt.Println(n)
+	fmt.Println(&n)
+
+	// // memory address
+	// fmt.Println(&n)
+
+	// var p *int = &n
+
+	// fmt.Println(p)
+	// fmt.Println(*p) // アドレスがさししめしている値を取得
 }
