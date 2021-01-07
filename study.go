@@ -2,52 +2,15 @@ package main
 
 import "fmt"
 
-type Vertex struct {
-	X int
-	Y int
-	S string
-}
-
-func changeVertex(v Vertex) {
-	v.X = 1000
-}
-func changeVertex2(v *Vertex) {
-	v.X = 1000
-}
 func main() {
-	v := Vertex{X: 1, Y: 2, S: "test"}
-	changeVertex(v)
-	fmt.Println(v)
-	v2 := &Vertex{1, 2, "test"}
-	changeVertex2(v2)
-	fmt.Println(*v2)
-	// v := Vertex{X: 1, Y: 2}
-	// fmt.Println(v)
-	// fmt.Println(v.X, v.Y)
-	// v.X = 100
-	// fmt.Println(v.X)
-
-	// v2 := Vertex{X: 1}
-	// fmt.Println(v2)
-
-	// v3 := Vertex{1, 2, "test"}
-	// fmt.Println(v3)
-
-	// v4 := Vertex{}
-	// fmt.Println(v4)
-
-	// fmt.Printf("%T %v\n", v4, v4)
-	// var v5 Vertex
-	// fmt.Printf("%T %v\n", v5, v5)
-
-	// v6 := new(Vertex)
-	// fmt.Printf("%T %v\n", v6, v6)
-
-	// v7 := &Vertex{}
-	// fmt.Printf("%T %v\n", v7, v7)
-
-	// s := make([]int, 0)
-	// s := []int{}
-	// fmt.Println(s)
-
+	var i int = 100
+	var j int = 200
+	var p1 *int
+	var p2 *int
+	p1 = &i
+	p2 = &j
+	i = *p1 + *p2 // important
+	p2 = p1
+	j = *p2 + i
+	fmt.Println(j)
 }
