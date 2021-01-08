@@ -2,15 +2,47 @@ package main
 
 import "fmt"
 
+type Vertex struct {
+	x, y int
+}
+
+func (v Vertex) Area() int {
+	return v.x * v.y
+}
+
+func (v *Vertex) Scale(i int) {
+	v.x = v.x * i
+	v.y = v.y * i
+}
+
+type Vertex3D struct {
+	Vertex
+	z int
+}
+
+func (v Vertex3D) Area3D() int {
+	return v.x * v.y * v.z
+}
+
+func (v *Vertex3D) Scale3D(i int) {
+	v.x = v.x * i
+	v.y = v.y * i
+	v.z = v.z * i
+}
+
+// func Area(v Vertex) int {
+// 	return v.x * v.y
+// }
+
+func New(x, y, z int) *Vertex3D {
+	return &Vertex3D{Vertex{x, y}, z}
+}
 func main() {
-	var i int = 100
-	var j int = 200
-	var p1 *int
-	var p2 *int
-	p1 = &i
-	p2 = &j
-	i = *p1 + *p2 // important
-	p2 = p1
-	j = *p2 + i
-	fmt.Println(j)
+	// v := Vertex{3, 4}
+	// res := Area(v)
+	// fmt.Println(res)
+	v := New(3, 4, 5)
+	v.Scale3D(10)
+	// fmt.Println(v.Area())
+	fmt.Println(v.Area3D())
 }
