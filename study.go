@@ -2,47 +2,32 @@ package main
 
 import "fmt"
 
-type Vertex struct {
-	x, y int
+type Human interface {
+	Say() string
+}
+type Person struct {
+	Name string
 }
 
-func (v Vertex) Area() int {
-	return v.x * v.y
+type Dog struct {
+	Name string
 }
 
-func (v *Vertex) Scale(i int) {
-	v.x = v.x * i
-	v.y = v.y * i
+func (p *Person) Say() string {
+	p.Name = "Mr." + p.Name
+	return p.Name
 }
+func DriveCar(human Human) {
+	if human.Say() == "Mr.Mike" {
+		fmt.Println("Run")
+	} else {
+		fmt.Println("Get out")
+	}
 
-type Vertex3D struct {
-	Vertex
-	z int
-}
-
-func (v Vertex3D) Area3D() int {
-	return v.x * v.y * v.z
-}
-
-func (v *Vertex3D) Scale3D(i int) {
-	v.x = v.x * i
-	v.y = v.y * i
-	v.z = v.z * i
-}
-
-// func Area(v Vertex) int {
-// 	return v.x * v.y
-// }
-
-func New(x, y, z int) *Vertex3D {
-	return &Vertex3D{Vertex{x, y}, z}
 }
 func main() {
-	// v := Vertex{3, 4}
-	// res := Area(v)
-	// fmt.Println(res)
-	v := New(3, 4, 5)
-	v.Scale3D(10)
-	// fmt.Println(v.Area())
-	fmt.Println(v.Area3D())
+	var mike Human = &Person{"Mike"}
+	DriveCar(mike)
+	// var dog Dog = Dog{"dog"}
+	// DriveCar(dog)
 }
