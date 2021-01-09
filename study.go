@@ -1,37 +1,36 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-func producer(first chan int) {
-	defer close(first)
-	for i := 0; i < 10; i++ {
-		first <- i
+func goroutine1(ch chan string) {
+	for {
+		ch <- "packet from 1"
+		time.Sleep(1 * time.Second)
 	}
 }
 
-func multi2(first <-chan int, second chan<- int) {
-	defer close(second)
-	for i := range first {
-		second <- i * 2
-	}
-}
-
-func multi4(second chan int, third chan int) {
-	defer close(third)
-	for i := range second {
-		third <- i * 4
+func goroutine2(ch chan string) {
+	for {
+		ch <- "packet from 2"
+		time.Sleep(1 * time.Second)
 	}
 }
 
 func main() {
-	first := make(chan int)
-	second := make(chan int)
-	third := make(chan int)
+	c1 := make(chan string)
+	c2 := make(chan string)
+	go goroutine1(c1)
+	go goroutine2(c2)
 
-	go producer(first)
-	go multi2(first, second)
-	go multi4(second, third)
-	for result := range third {
-		fmt.Println(result)
+	for {
+		select {
+		case msg1 := <-c1:
+			fmt.Println(msg1)
+		case msg2 := <-c2:
+			fmt.Println(msg2)
+		}
 	}
 }
