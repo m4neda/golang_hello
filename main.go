@@ -2,20 +2,25 @@ package main
 
 import (
 	"fmt"
-	"golang_hello/mylib"
-	"golang_hello/mylib/under"
+	"time"
 )
 
+func longProcess(ch chan string) {
+	fmt.Println("run")
+	time.Sleep(2 * time.Second)
+	fmt.Println("finish")
+	ch <- "result"
+}
 func main() {
-	s := []int{1, 2, 3, 4, 5}
-	fmt.Println(mylib.Average(s))
+	ch := make(chan string)
+	go longProcess(ch)
 
-	mylib.Say()
-	under.Hello()
+	for {
+		select {
+		case <-ch:
+			fmt.Println("success")
+			return
+		}
+	}
 
-	person := mylib.Person{Name: "Mike", Age: 20}
-	fmt.Println(person)
-
-	fmt.Println(mylib.Public)
-	fmt.Println(mylib.Private)
 }
