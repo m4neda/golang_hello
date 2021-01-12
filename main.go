@@ -1,23 +1,35 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"io/ioutil"
+	"net/http"
+	"net/url"
 )
 
 func main() {
-	// content, err := ioutil.ReadFile("main.go")
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// fmt.Println(string(content))
+	// resp, _ := http.Get("http://example.com")
+	// defer resp.Body.Close()
+	// body, _ := ioutil.ReadAll(resp.Body)
+	// fmt.Println(string(body))
 
-	// if err := ioutil.WriteFile("ioutil_temp.go", content, 0666); err != nil {
-	// 	log.Fatalln(err)
-	// }
+	base, _ := url.Parse("http://example.com/fafi")
+	fmt.Println(base)
+	reference, _ := url.Parse("/test?a=1&b=2")
+	endpoint := base.ResolveReference(reference).String()
+	fmt.Println(endpoint)
 
-	r := bytes.NewBuffer([]byte("abc"))
-	content, _ := ioutil.ReadAll(r)
-	fmt.Println(string(content))
+	req, _ := http.NewRequest("GET", endpoint, nil)
+	// req, _ := http.NewRequest("GET", endpoint, bytes.NewBuffer([]byte("password")))
+	req.Header.Add("Test-header", "W/saf")
+	q := req.URL.Query()
+	q.Add("c", "3&%")
+	fmt.Println(q)
+	fmt.Println(q.Encode())
+	req.URL.RawQuery = q.Encode()
+
+	var client *http.Client = &http.Client{}
+	resp, _ := client.Do(req)
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println(string(body))
 }
