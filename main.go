@@ -1,26 +1,23 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
-	"time"
+	"io/ioutil"
 )
 
-func longProcess(ch chan string) {
-	fmt.Println("run")
-	time.Sleep(2 * time.Second)
-	fmt.Println("finish")
-	ch <- "result"
-}
 func main() {
-	ch := make(chan string)
-	go longProcess(ch)
+	// content, err := ioutil.ReadFile("main.go")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Println(string(content))
 
-	for {
-		select {
-		case <-ch:
-			fmt.Println("success")
-			return
-		}
-	}
+	// if err := ioutil.WriteFile("ioutil_temp.go", content, 0666); err != nil {
+	// 	log.Fatalln(err)
+	// }
 
+	r := bytes.NewBuffer([]byte("abc"))
+	content, _ := ioutil.ReadAll(r)
+	fmt.Println(string(content))
 }
